@@ -84,6 +84,8 @@ distclean: clean
 	echo "exit" >> create_project.tcl
 	vitis_hls -n create_project.tcl
 
+#%.vhdl: 
+
 # synthesis run
 %.runs/synth_1/%.dcp: %.xpr $(SYN_FILES_REL) $(INC_FILES_REL) $(XDC_FILES_REL)
 	echo "open_project $*.xpr" > run_synth.tcl
