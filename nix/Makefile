@@ -29,7 +29,7 @@
 .SECONDARY:
 
 CONFIG ?= config.mk
--include ../$(CONFIG)
+-include ./$(CONFIG)
 
 SYN_FILES_REL = $(patsubst %, ../%, $(SYN_FILES))
 INC_FILES_REL = $(patsubst %, ../%, $(INC_FILES))
