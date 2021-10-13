@@ -9,9 +9,9 @@ let
   '';
 
   makefile-contents = builtins.readFile ./nix/Makefile;
-  make-script = pkgs.writeShellScriptBin "makeme" ''
+  make-script = pkgs.writeShellScriptBin "make" ''
     function run {
-      nix-shell --pure --argstr run "make -f ./nix/Makefile $*" "${vitis-fhs}"
+      nix-shell --pure --argstr run "make -f ./nix/Makefile -I ./ $*" "${vitis-fhs}"
     }
 
     if [[ $# -eq 0 ]]; then
@@ -24,5 +24,5 @@ let
   shell-scripts = [ vitis-shell-script make-script ];
 
 in pkgs.mkShell {
-  packages = with pkgs; [ gnumake ] ++ shell-scripts;
+  packages = with pkgs; [ ] ++ shell-scripts;
 }

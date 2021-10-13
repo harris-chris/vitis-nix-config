@@ -2,9 +2,17 @@
 
 let 
   xrt = pkgs.callPackage ./xrt.nix {};
+  
+  # Necessary or else vitis throws an error
+  arch-dummy-script = pkgs.writeShellScriptBin "arch" ''
+    #!/bin/bash
+    echo $(uname -m)
+  '';
+
   vitis-fhs = pkgs.buildFHSUserEnv {
     name = "vitis";
     targetPkgs = pkgs: with pkgs; [
+      arch-dummy-script
       eclipses.eclipse-sdk
       bash
       coreutils

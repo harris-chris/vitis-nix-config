@@ -1,0 +1,5 @@
+/result
+/log
+create_project.tcl
+defines.v
+vitis_hls.log

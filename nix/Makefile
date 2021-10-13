@@ -71,7 +71,7 @@ distclean: clean
 ###################################################################
 
 # vitis_hls project file
-%.xpr: Makefile $(XCI_FILES_REL) $(IP_TCL_FILES_REL)
+%.xpr: ./nix/Makefile $(XCI_FILES_REL) $(IP_TCL_FILES_REL)
 	rm -rf defines.v
 	touch defines.v
 	for x in $(DEFS); do echo '`define' $$x >> defines.v; done
