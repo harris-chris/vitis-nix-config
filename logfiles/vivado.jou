@@ -2,11 +2,11 @@
 # Vivado v2021.1 (64-bit)
 # SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
 # IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
-# Start of session at: Wed Oct 13 05:15:21 2021
-# Process ID: 2043697
+# Start of session at: Thu Oct 14 00:34:10 2021
+# Process ID: 50431
 # Current directory: /data/vap/vitis-nix-config
-# Command line: vivado
-# Log file: /data/vap/vitis-nix-config/vivado.log
-# Journal file: /data/vap/vitis-nix-config/vivado.jou
+# Command line: vivado -log ./logfiles/vivado.log -journal ./logfiles/vivado.jou
+# Log file: /data/vap/vitis-nix-config/./logfiles/vivado.log
+# Journal file: /data/vap/vitis-nix-config/./logfiles/vivado.jou
 #-----------------------------------------------------------
 start_gui

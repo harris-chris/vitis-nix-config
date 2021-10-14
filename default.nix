@@ -5,25 +5,21 @@ let
   vivado-fhs = "./nix/vivado-fhs-env.nix";
   xilinx-fhs = "./nix/xilinx-fhs-env.nix";
 
-  vitis-shell-script = pkgs.writeShellScriptBin "vitis-shell" ''
+  vitis-repl-script = pkgs.writeShellScriptBin "vitis-repl" ''
     #!/bin/bash
-    nix-shell --pure --argstr run "bash" "${xilinx-fhs}"
+    nix-shell --pure --argstr run "vitis_hls" "${xilinx-fhs}"
   '';
 
-  vivado-shell-script = pkgs.writeShellScriptBin "vivado-shell" ''
+  vivado-run-command = "vivado -log ./logfiles/vivado.log -journal ./logfiles/vivado.jou";
+  vivado-gui-script = pkgs.writeShellScriptBin "vivado-gui" ''
     #!/bin/bash
-    nix-shell --pure --argstr run "vivado" "${vivado-fhs}"
-  '';
-
-  xvivado-shell-script = pkgs.writeShellScriptBin "xvivado-shell" ''
-    #!/bin/bash
-    nix-shell --argstr run "vivado" "${xilinx-fhs}"
+    nix-shell --argstr run "${vivado-run-command}" "${xilinx-fhs}"
   '';
 
   makefile-contents = builtins.readFile ./nix/Makefile;
   make-script = pkgs.writeShellScriptBin "make" ''
     function run {
-      nix-shell --pure --argstr run "make -f ./nix/Makefile -I ./ $*" "${vitis-fhs}"
+      nix-shell --pure --argstr run "make -f ./nix/Makefile -I ./ $*" "${xilinx-fhs}"
     }
 
     if [[ $# -eq 0 ]]; then
@@ -33,12 +29,12 @@ let
     fi
   '';
 
-  run-script = pkgs.writeShellScriptBin "vitis-run" ''
+  run-script = pkgs.writeShellScriptBin "xilinx-shell" ''
     #!/bin/bash
-    nix-shell --pure --argstr run "$@" "${vitis-fhs}"
+    nix-shell --pure --argstr run "bash" "${xilinx-fhs}"
   '';
 
-  shell-scripts = [ vitis-shell-script vivado-shell-script xvivado-shell-script make-script run-script ];
+  shell-scripts = [ vitis-repl-script vivado-gui-script make-script run-script ];
 
 in pkgs.mkShell {
   packages = with pkgs; [ ] ++ shell-scripts;
