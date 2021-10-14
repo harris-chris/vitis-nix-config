@@ -10,7 +10,7 @@ let
     nix-shell --pure --argstr run "vitis_hls -i" "${xilinx-fhs}"
   '';
 
-  vivado-run-command = "vivado -log ./logfiles/vivado.log -journal ./logfiles/vivado.jou";
+  vivado-run-command = "vivado -log ./logfiles/vivado/vivado.log -journal ./logfiles/vivado/vivado.jou";
   vivado-gui-script = pkgs.writeShellScriptBin "vivado-gui" ''
     #!/bin/bash
     nix-shell --argstr run "${vivado-run-command}" "${xilinx-fhs}"

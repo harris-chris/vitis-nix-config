@@ -1,8 +1,10 @@
 /result
 /log
-create_project.tcl
+/logfiles
+*.tcl
 defines.v
-vitis_hls.log
+*.jou
+*.log
 
 # Delete these if using for actual project
 *.vhdl
