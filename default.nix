@@ -7,7 +7,7 @@ let
 
   vitis-repl-script = pkgs.writeShellScriptBin "vitis-repl" ''
     #!/bin/bash
-    nix-shell --pure --argstr run "vitis_hls" "${xilinx-fhs}"
+    nix-shell --pure --argstr run "vitis_hls -i" "${xilinx-fhs}"
   '';
 
   vivado-run-command = "vivado -log ./logfiles/vivado.log -journal ./logfiles/vivado.jou";
@@ -17,9 +17,10 @@ let
   '';
 
   makefile-contents = builtins.readFile ./nix/Makefile;
+  makefile-run-command = "make -f ./nix/Makefile -I ./ $*";
   make-script = pkgs.writeShellScriptBin "make" ''
     function run {
-      nix-shell --pure --argstr run "make -f ./nix/Makefile -I ./ $*" "${xilinx-fhs}"
+      nix-shell --pure --argstr run "${makefile-run-command}" "${xilinx-fhs}"
     }
 
     if [[ $# -eq 0 ]]; then

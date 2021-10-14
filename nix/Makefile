@@ -82,7 +82,7 @@ distclean: clean
 	for x in $(XCI_FILES_REL); do echo "import_ip $$x" >> create_project.tcl; done
 	for x in $(IP_TCL_FILES_REL); do echo "source $$x" >> create_project.tcl; done
 	echo "exit" >> create_project.tcl
-	vitis_hls -n create_project.tcl
+	vitis_hls -n -f create_project.tcl
 
 #%.vhdl: 
 
