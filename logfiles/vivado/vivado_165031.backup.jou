@@ -2,8 +2,8 @@
 # Vivado v2021.1 (64-bit)
 # SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
 # IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
-# Start of session at: Mon Oct 18 06:58:41 2021
-# Process ID: 169978
+# Start of session at: Mon Oct 18 06:40:58 2021
+# Process ID: 165031
 # Current directory: /data/vap/vitis-nix-config
 # Command line: vivado -log ./logfiles/vivado/vivado.log -journal ./logfiles/vivado/vivado.jou
 # Log file: /data/vap/vitis-nix-config/./logfiles/vivado/vivado.log
@@ -12,4 +12,4 @@
 start_gui
 open_project /data/vap/vitis-nix-config/thermostat.xpr
 update_compile_order -fileset sources_1
-update_compile_order -fileset sources_1
+set_property source_mgmt_mode DisplayOnly [current_project]

@@ -1,19 +1,19 @@
-entity THERMOSTAT is
-  port ( ACTUAL : in bit_vector(6 down to 0);
-         TARGET : in bit_vector(6 down to 0);
-         SWICH  : in bit;
-         DISPLAY: out bit_vector(6 down to 0)
+entity thermostat is
+  port ( ACTUAL : in bit_vector(6 downto 0);
+         TARGET : in bit_vector(6 downto 0);
+         SWITCH  : in bit;
+         DISPLAY: out bit_vector(6 downto 0)
        );
-end THERMOSTAT;
+end thermostat;
 
-architecture BEHAV of THERMOSTAT is
-
+architecture BEHAV of thermostat is
 begin
-  if SWITCH  = '1' then
-    DISPLAY <= ACTUAL;
-  else
-    DISPLAY <= TARGET;
-  end if;
-end process;
-
+    process (SWITCH, ACTUAL, TARGET) 
+    begin
+        if (SWITCH = '1') then
+            DISPLAY <= ACTUAL;
+        else
+            DISPLAY <= TARGET;
+        end if; 
+    end process;
 end BEHAV;

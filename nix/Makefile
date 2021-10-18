@@ -71,23 +71,14 @@ distclean: clean
 # Target implementations
 ###################################################################
 
-%.main/$(wildcard *.dcp): %.dep/dep
-	echo "Doing main"
-
-%.dep/dep:
-	echo "Doing dep"
-
 # project file
 %.xpr: $(XCI_FILES_REL) $(IP_TCL_FILES_REL) 
-	rm -rf defines.v
-	touch defines.v
-	for x in $(DEFS); do echo '`define' $$x >> defines.v; done
 	echo "create_project -force -part $(FPGA_PART) $*" > create_project.tcl
-	echo "add_files -fileset sources_1 defines.v" >> create_project.tcl
 	for x in $(SYN_FILES_REL); do echo "add_files -fileset sources_1 $$x" >> create_project.tcl; done
 	for x in $(XDC_FILES_REL); do echo "add_files -fileset constrs_1 $$x" >> create_project.tcl; done
 	for x in $(XCI_FILES_REL); do echo "import_ip $$x" >> create_project.tcl; done
 	for x in $(IP_TCL_FILES_REL); do echo "source $$x" >> create_project.tcl; done
+	#echo "set_property \"top\" \"$(FPGA_TOP)\" [get_filesets sources_1]" >> create_project.tcl
 	echo "exit" >> create_project.tcl
 	vivado -nojournal -nolog -mode batch -source create_project.tcl
 
