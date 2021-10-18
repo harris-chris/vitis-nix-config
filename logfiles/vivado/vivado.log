@@ -1,0 +1,40 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Sun Oct 17 00:27:53 2021
+# Process ID: 41668
+# Current directory: /data/vap/vitis-nix-config
+# Command line: vivado -log ./logfiles/vivado/vivado.log -journal ./logfiles/vivado/vivado.jou
+# Log file: /data/vap/vitis-nix-config/./logfiles/vivado/vivado.log
+# Journal file: /data/vap/vitis-nix-config/./logfiles/vivado/vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project /data/vap/xilinx/simulation_test_1/simulation_test_1.xpr
+WARNING: [filemgmt 56-3] Default IP Output Path : Could not find the directory '/data/vap/xilinx/simulation_test_1/simulation_test_1.gen/sources_1'.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/xilinx/Vivado/2021.1/data/ip'.
+INFO: [IP_Flow 19-3899] Cannot get the environment domain name variable for the component vendor name. Setting the vendor name to 'user.org'.
+open_project: Time (s): cpu = 00:00:24 ; elapsed = 00:00:08 . Memory (MB): peak = 7765.629 ; gain = 69.434 ; free physical = 6661 ; free virtual = 12289
+update_compile_order -fileset sources_1
+launch_runs synth_1 -jobs 6
+[Sun Oct 17 00:31:34 2021] Launched synth_1...
+Run output will be captured here: /data/vap/xilinx/simulation_test_1/simulation_test_1.runs/synth_1/runme.log
+open_run synth_1 -name synth_1
+Design is defaulting to impl run constrset: constrs_1
+Design is defaulting to synth run part: xc7a200tfbg676-2
+INFO: [Device 21-403] Loading part xc7a200tfbg676-2
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 7830.078 ; gain = 0.000 ; free physical = 5580 ; free virtual = 11369
+INFO: [Project 1-479] Netlist was created with Vivado 2021.1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 7830.078 ; gain = 0.000 ; free physical = 5486 ; free virtual = 11275
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+open_run: Time (s): cpu = 00:00:21 ; elapsed = 00:00:08 . Memory (MB): peak = 7862.090 ; gain = 32.012 ; free physical = 5345 ; free virtual = 11137
+exit
+INFO: [Common 17-206] Exiting Vivado at Sun Oct 17 02:24:45 2021...

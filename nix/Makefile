@@ -31,10 +31,10 @@
 CONFIG ?= config.mk
 -include ./$(CONFIG)
 
-SYN_FILES_REL = $(patsubst %, ../%, $(SYN_FILES))
-INC_FILES_REL = $(patsubst %, ../%, $(INC_FILES))
-XCI_FILES_REL = $(patsubst %, ../%, $(XCI_FILES))
-IP_TCL_FILES_REL = $(patsubst %, ../%, $(IP_TCL_FILES))
+SYN_FILES_REL = $(SYN_FILES) # $(patsubst %, ../%, $(SYN_FILES))
+INC_FILES_REL = $(INC_FILES) # $(patsubst %, ../%, $(INC_FILES))
+XCI_FILES_REL = $(XCI_FILES) # $(patsubst %, ../%, $(XCI_FILES))
+IP_TCL_FILES_REL = $(IP_TCL_FILES) # $(patsubst %, ../%, $(IP_TCL_FILES))
 
 ifdef XDC_FILES
   XDC_FILES_REL = $(patsubst %, ../%, $(XDC_FILES))
@@ -49,51 +49,63 @@ endif
 # clean: remove output files and project files
 ###################################################################
 
-all: fpga
+#all: fpga
 
-fpga: $(FPGA_TOP).bit
+#fpga: $(FPGA_TOP).bit
 
-vitis_hls: $(FPGA_TOP).xpr
-	vitis_hls $(FPGA_TOP).xpr
+#vitis_hls: $(FPGA_TOP).xpr
+	#vitis_hls $(FPGA_TOP).xpr
 
-tmpclean:
-	-rm -rf *.log *.jou *.cache *.gen *.hbs *.hw *.ip_user_files *.runs *.xpr *.html *.xml *.sim *.srcs *.str .Xil defines.v
-	-rm -rf create_project.tcl run_synth.tcl run_impl.tcl generate_bit.tcl
+#tmpclean:
+	#-rm -rf *.log *.jou *.cache *.gen *.hbs *.hw *.ip_user_files *.runs *.xpr *.html *.xml *.sim *.srcs *.str .Xil defines.v
+	#-rm -rf create_project.tcl run_synth.tcl run_impl.tcl generate_bit.tcl
 
-clean: tmpclean
-	-rm -rf *.bit program.tcl generate_mcs.tcl *.mcs *.prm flash.tcl
+#clean: tmpclean
+	#-rm -rf *.bit program.tcl generate_mcs.tcl *.mcs *.prm flash.tcl
 
-distclean: clean
-	-rm -rf rev
+#distclean: clean
+	#-rm -rf rev
 
 ###################################################################
 # Target implementations
 ###################################################################
 
-# vitis_hls project file
-%.xpr: ./nix/Makefile $(XCI_FILES_REL) $(IP_TCL_FILES_REL)
-	rm -rf defines.v
-	touch defines.v
-	for x in $(DEFS); do echo '`define' $$x >> defines.v; done
-	echo "create_project -force -part $(FPGA_PART) $*" > create_project.tcl
-	echo "add_files -fileset sources_1 defines.v" >> create_project.tcl
-	for x in $(SYN_FILES_REL); do echo "add_files -fileset sources_1 $$x" >> create_project.tcl; done
-	for x in $(XDC_FILES_REL); do echo "add_files -fileset constrs_1 $$x" >> create_project.tcl; done
-	for x in $(XCI_FILES_REL); do echo "import_ip $$x" >> create_project.tcl; done
-	for x in $(IP_TCL_FILES_REL); do echo "source $$x" >> create_project.tcl; done
-	echo "exit" >> create_project.tcl
-	vitis_hls -n -l ./logfiles/vitis/vitis_hls.log create_project.tcl
+%_main_%:
+	echo "matched target $@"
 
-#%.vhdl: 
+%dep%:
+	echo "matched dependency $@"
+
+%.sgd:
+	echo "sall goodman"
+
+%/%.sgd:
+	echo "not this"
+
+#  project file
+#%.xpr: $(XCI_FILES_REL) $(IP_TCL_FILES_REL) # ./nix/Makefile $(XCI_FILES_REL) $(IP_TCL_FILES_REL)
+	#rm -rf defines.v
+	#touch defines.v
+	#for x in $(DEFS); do echo '`define' $$x >> defines.v; done
+	#echo "create_project -force -part $(FPGA_PART) $*" > create_project.tcl
+	#echo "add_files -fileset sources_1 defines.v" >> create_project.tcl
+	#for x in $(SYN_FILES_REL); do echo "add_files -fileset sources_1 $$x" >> create_project.tcl; done
+	#for x in $(XDC_FILES_REL); do echo "add_files -fileset constrs_1 $$x" >> create_project.tcl; done
+	#for x in $(XCI_FILES_REL); do echo "import_ip $$x" >> create_project.tcl; done
+	#for x in $(IP_TCL_FILES_REL); do echo "source $$x" >> create_project.tcl; done
+	#echo "exit" >> create_project.tcl
+	#vivado -nojournal -nolog -mode batch -source create_project.tcl
+
 
 # synthesis run
-%.runs/synth_1/%.dcp: %.xpr $(SYN_FILES_REL) $(INC_FILES_REL) $(XDC_FILES_REL)
+# %.runs/synth_1/%.dcp: %.xpr $(SYN_FILES_REL) $(INC_FILES_REL) $(XDC_FILES_REL)
+%.s: %.xpr # $(SYN_FILES_REL) $(INC_FILES_REL) $(XDC_FILES_REL)
 	echo "open_project $*.xpr" > run_synth.tcl
 	echo "reset_run synth_1" >> run_synth.tcl
 	echo "launch_runs -jobs 4 synth_1" >> run_synth.tcl
 	echo "wait_on_run synth_1" >> run_synth.tcl
 	echo "exit" >> run_synth.tcl
-	vitis_hls -n run_synth.tcl
+	vivado -n run_synth.tcl
 
 # implementation run
 %.runs/impl_1/%_routed.dcp: %.runs/synth_1/%.dcp
