@@ -1,0 +1,11 @@
+**/*.jou
+*.log
+*.cache/
+*.hw/
+*.user_files/
+*.runs/
+*.tcl
+
+# Delete these if using for actual project
+*.vhdl
+*.xpr
