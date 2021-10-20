@@ -1,0 +1,1 @@
+-wto "49b029c17f5b42e6bb9981a43b82472a" --incr --debug "typical" --relax --mt "8" -L "xil_defaultlib" -L "secureip" --snapshot "thermostat_simulation_behav" "xil_defaultlib.thermostat_simulation" -log "elaborate.log" 

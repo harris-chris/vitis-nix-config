@@ -54,6 +54,8 @@ all: fpga
 
 fpga: $(FPGA_TOP).bit
 
+synthesis: $(FPGA_TOP).runs/synth_1/synth.dcp
+
 vitis_hls: $(FPGA_TOP).xpr
 	vitis_hls $(FPGA_TOP).xpr
 

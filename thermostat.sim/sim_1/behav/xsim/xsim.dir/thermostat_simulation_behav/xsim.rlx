@@ -1,0 +1,12 @@
+
+{ 
+    crc :  10383483962392229852  , 
+    ccp_crc :  0  , 
+    cmdline : " -wto 49b029c17f5b42e6bb9981a43b82472a --incr --debug typical --relax --mt 8 -L xil_defaultlib -L secureip --snapshot thermostat_simulation_behav xil_defaultlib.thermostat_simulation" , 
+    buildDate : "Jun 10 2021" , 
+    buildTime : "19:45:28" , 
+    linkCmd : "/usr/bin/gcc -Wa,-W  -O -fPIC  -m64  -Wl,--no-as-needed  -Wl,--unresolved-symbols=ignore-all  -o \"xsim.dir/thermostat_simulation_behav/xsimk\"   \"xsim.dir/thermostat_simulation_behav/obj/xsim_0.lnx64.o\" \"xsim.dir/thermostat_simulation_behav/obj/xsim_1.lnx64.o\" -L\"/opt/xilinx/Vivado/2021.1/lib/lnx64.o\" -lrdi_simulator_kernel   -lrdi_simbridge_kernel" , 
+    aggregate_nets : 
+    [ 
+    ] 
+} 
