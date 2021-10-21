@@ -80,6 +80,9 @@ distclean: clean
 	for x in $(XDC_FILES_REL); do echo "add_files -fileset constrs_1 $$x" >> create_project.tcl; done
 	for x in $(XCI_FILES_REL); do echo "import_ip $$x" >> create_project.tcl; done
 	for x in $(IP_TCL_FILES_REL); do echo "source $$x" >> create_project.tcl; done
+	echo "set_property file_type $(FILE_TYPE) [get_files -of_objects [get_filesets sources_1]]" >> create_project.tcl
+
+	#echo "set_property file_type $(FILE_TYPE) [get_files sources_1]" >> create_project.tcl
 	#echo "set_property \"top\" \"$(FPGA_TOP)\" [get_filesets sources_1]" >> create_project.tcl
 	echo "exit" >> create_project.tcl
 	vivado -nojournal -nolog -mode batch -source create_project.tcl

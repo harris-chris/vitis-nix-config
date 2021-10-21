@@ -1,7 +1,0 @@
-# compile vhdl design source files
-vhdl xil_defaultlib  \
-"../../../../src/rtl/thermostat.vhdl" \
-"../../../../src/rtl/thermostat_simulation.vhdl" \
-
-# Do not sort compile order
-nosort
