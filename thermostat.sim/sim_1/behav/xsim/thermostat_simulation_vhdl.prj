@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl2008 xil_defaultlib  \
+"../../../../src/rtl/thermostat.vhdl" \
+"../../../../src/rtl/thermostat_simulation.vhdl" \
+
+# Do not sort compile order
+nosort

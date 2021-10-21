@@ -54,10 +54,12 @@ all: fpga
 
 fpga: $(FPGA_TOP).bit
 
+project: clean $(FPGA_TOP).xpr
+
 synthesis: $(FPGA_TOP).runs/synth_1/synth.dcp
 
-vitis_hls: $(FPGA_TOP).xpr
-	vitis_hls $(FPGA_TOP).xpr
+#vitis_hls: $(FPGA_TOP).xpr
+	#vitis_hls $(FPGA_TOP).xpr
 
 tmpclean:
 	-rm -rf *.log *.jou *.cache *.gen *.hbs *.hw *.ip_user_files *.runs *.xpr *.html *.xml *.sim *.srcs *.str .Xil defines.v
