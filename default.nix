@@ -13,7 +13,14 @@ let
   vivado-run-command = "vivado -log ./logfiles/vivado/vivado.log -journal ./logfiles/vivado/vivado.jou";
   vivado-gui-script = pkgs.writeShellScriptBin "vivado-gui" ''
     #!/bin/bash
-    nix-shell --argstr run "${vivado-run-command}" "${xilinx-fhs}"
+    export DISPLAY=:0
+    nix-shell --pure --argstr run "${vivado-run-command}" "${xilinx-fhs}"
+  '';
+
+  vitis-run-command = "vitis_hls --verbose";
+  vitis-gui-script = pkgs.writeShellScriptBin "vitis-gui" ''
+    #!/bin/bash
+    nix-shell --pure --argstr run "${vitis-run-command}" "${xilinx-fhs}"
   '';
 
   makefile-contents = builtins.readFile ./nix/Makefile;
@@ -35,8 +42,8 @@ let
     nix-shell --pure --argstr run "bash" "${xilinx-fhs}"
   '';
 
-  shell-scripts = [ vitis-repl-script vivado-gui-script make-script run-script ];
+  shell-scripts = [ vitis-repl-script vivado-gui-script vitis-gui-script make-script run-script ];
 
 in pkgs.mkShell {
-  packages = with pkgs; [ ] ++ shell-scripts;
+  packages = with pkgs; [ xorg.xhost ] ++ shell-scripts;
 }
