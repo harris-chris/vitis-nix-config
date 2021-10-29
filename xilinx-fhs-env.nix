@@ -60,6 +60,7 @@ let
       vitis_dir=${vitisPath}/*/bin
       export PATH=$vitis_dir:$PATH
       export XILINX_XRT="${xrt}"
+      export DISPLAY=:0
     '';
     #runScript = "vitis_hls -debug -test";
     #runScript = "vitis_hls -i";

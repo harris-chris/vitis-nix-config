@@ -13,7 +13,6 @@ let
   vivado-run-command = "vivado -log ./logfiles/vivado/vivado.log -journal ./logfiles/vivado/vivado.jou";
   vivado-gui-script = pkgs.writeShellScriptBin "vivado-gui" ''
     #!/bin/bash
-    export DISPLAY=:0
     nix-shell --pure --argstr run "${vivado-run-command}" "${xilinx-fhs}"
   '';
 
