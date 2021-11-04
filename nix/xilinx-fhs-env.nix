@@ -54,6 +54,10 @@ let
     profile = ''
       export _JAVA_AWT_WM_NONREPARENTING=1
       source ${vitisPath}/settings64.sh
+      vitis_dir=${vitisPath}/*/bin
+      export PATH=$vitis_dir:$PATH
+      export XILINX_XRT="${xrt}"
+      export DISPLAY=:0
     '';
     #runScript = "vitis_hls -debug -test";
     #runScript = "vitis_hls -i";
